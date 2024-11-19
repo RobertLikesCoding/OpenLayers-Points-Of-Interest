@@ -1,5 +1,34 @@
-# Vue 3 + TypeScript + Vite
+# Points Of Interest App
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Idea
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+This app is going to use the Open Layers API to how a map with markers of my favourite locations in my area. This is to get to know the Open Layers API and experementing with it's functionalities.
+
+## Features
+
+- display a map with my location as a starting point
+- show pins for locations I find interesting
+- optional: filter pins by category
+
+## Usage
+- Pan and zoom to explore the map
+- Click on pins to see location details
+- (Optional) Use the category filter to display specific types of locations
+
+## Components
+
+- Map
+- LocationCardsList
+- LocationCard
+- LocatorPin
+
+## Tech Stack
+
+- HTML, CSS, JS
+- VueJS
+- OpenLayers API
+- possibly MapBox API
+
+## Acknowledgments
+- OpenLayers Documentation
+- Icons from [Flaticon](https://www.flaticon.com/)
