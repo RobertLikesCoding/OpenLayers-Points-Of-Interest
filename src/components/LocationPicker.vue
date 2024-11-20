@@ -9,12 +9,13 @@
 
   function handleSelectedLocation(location: Location): void {
     selectedLocation.value = location;
+    console.log("Hello")
   }
 
 </script>
 
-<template lang="">
-  <div class="location-picker">
+<template>
+  <div class="location-picker p-2">
     <LocationCard
         v-for="location in locationsData"
         :key="location.id"
@@ -26,6 +27,6 @@
 </template>
 
 
-<style lang="">
+<style>
 
 </style>

@@ -1,17 +1,19 @@
 <script setup>
 import LocationPicker from "./components/LocationPicker.vue"
+import MapComponent from "./components/MapComponent.vue";
 
 </script>
 
 <template>
-  <div class="container d-flex">
+  <div class="d-flex w-100">
     <div class="list-group">
-      <h2 class="pb-2">Baumschulenweg</h2>
+      <h2 class="p-2">Baumschulenweg</h2>
       <LocationPicker />
     </div>
-    <div class="map">
-    </div>
+    <MapComponent />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

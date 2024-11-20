@@ -3,12 +3,12 @@
 
   defineProps<{
     location: Location,
-    selected: {type: boolean, default: false}
+    selected: boolean,
   }>();
 </script>
 
 <template>
-  <div class="list-group-item card mb-2" :class="{'active': selected}">
+  <div class="list-group-item card mb-2 p-0" :class="{'active': selected}">
     <div class="card-body">
       <h5 class="card-title">{{ location.title }}</h5>
       <p class="card-text">{{ location.description }}</p>
