@@ -1,23 +1,15 @@
-<script setup lang="ts">
-import LocationCard from './components/LocationCard.vue';
-import favoriteLocations from './data';
-import { ref } from "vue";
+<script setup>
+import LocationPicker from "./components/LocationPicker.vue"
 
-const locationsData = ref(favoriteLocations);
 </script>
 
 <template>
   <div class="container d-flex">
     <div class="list-group">
       <h2 class="pb-2">Baumschulenweg</h2>
-      <LocationCard
-        v-for="location in locationsData"
-        :key="location.id"
-        :location="location"
-      />
+      <LocationPicker />
     </div>
     <div class="map">
-
     </div>
   </div>
 </template>
