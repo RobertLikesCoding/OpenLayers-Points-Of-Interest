@@ -15,7 +15,7 @@
 </script>
 
 <template>
-  <div class="location-picker p-2">
+  <div class="location-picker p-2 location-list d-flex flex-column h-100">
     <LocationCard
         v-for="location in locationsData"
         :key="location.id"
@@ -28,5 +28,8 @@
 
 
 <style>
-
+  .location-picker {
+    position: absolute;
+    top: 14%;
+  }
 </style>
