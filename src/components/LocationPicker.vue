@@ -30,6 +30,6 @@
 <style>
   .location-picker {
     position: absolute;
-    top: 14%;
+    top: 10%;
   }
 </style>

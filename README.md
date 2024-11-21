@@ -2,7 +2,7 @@
 
 ## Idea
 
-This app is going to use the Open Layers API to how a map with markers of my favourite locations in my area. This is to get to know the Open Layers API and experementing with it's functionalities.
+This app is going to use the Open Layers API to show a map with markers of my favourite locations in my area. This is to get to know the Open Layers API and experementing with it's functionalities.
 
 ## Features
 

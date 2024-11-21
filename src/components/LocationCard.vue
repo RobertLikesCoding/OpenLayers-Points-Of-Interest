@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <div class="list-group-item card mb-3 p-0 location-card shadow" :class="{'active': selected}">
+  <div class="list-group-item card mb-3 p-0 location-card shadow" :class="{'border-success border-3': selected}">
     <div class="card-body">
       <h5 class="card-title">{{ location.title }}</h5>
       <p class="card-text">{{ location.description }}</p>

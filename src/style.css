@@ -32,7 +32,7 @@ body {
   height: 50rem;
   border: 2px solid black;
   border-radius: 5px;
-  positon: relative;
+  position: relative;
 }
 
 #map {
