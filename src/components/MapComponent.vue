@@ -12,6 +12,7 @@ import VectorLayer from 'ol/layer/Vector';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import { fromLonLat } from 'ol/proj';
+import coordinates from "../../coordinates.ts"
 
 onMounted(() => {
   const map = new Map({
@@ -54,8 +55,8 @@ onMounted(() => {
     console.log('Pin added at:', coordinate);
   })
 
-});
 
+});
 
 </script>
 
