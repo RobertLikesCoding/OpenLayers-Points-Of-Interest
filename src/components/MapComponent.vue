@@ -4,11 +4,11 @@ import 'ol/ol.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
-import {OSM, Vector} from 'ol/source.js';
+import { OSM, Vector } from 'ol/source.js';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
-import {Style, Icon} from 'ol/style.js';
+import { Style, Icon, Fill, Stroke } from 'ol/style.js';
 import { fromLonLat } from 'ol/proj';
 import Select from "ol/interaction/Select"
 import coordinates from "../../coordinates.ts"
@@ -32,6 +32,20 @@ function initiateMap() {
   });
 
   createPinsFromList(map);
+
+const selectedStyle = new Style({
+    image: new Icon({
+      anchor: [0.5, 1],
+      src: 'src/assets/active-locationmarker-svgrepo-com.svg',
+      scale: 0.05,
+    })
+  })
+
+  const select = new Select({
+    style: selectedStyle,
+  });
+  map.addInteraction(select);
+  const selectedFeatures = select.getFeatures();
 }
 
 const vectorSource = new Vector();
@@ -44,7 +58,7 @@ const vectorLayer = new VectorLayer({
 const pinStyle = new Style({
   image: new Icon({
     anchor: [0.5, 1],
-    src: 'src/assets/location-pin-alt-svgrepo-com.svg',
+    src: 'src/assets/locationmarker-svgrepo-com.svg',
     scale: 0.05,
   })
 })
@@ -57,7 +71,6 @@ function createPinsFromList(map: Map) {
     })
     pin.setStyle(pinStyle);
     vectorSource.addFeature(pin);
-    console.log('Pin added at:', coord.longlat);
   })
 }
 
@@ -65,13 +78,15 @@ function selectLocationPin() {
   const selectedStyle = new Style({
     image: new Icon({
       anchor: [0.5, 1],
-      src: 'src/assets/active-location-pin-alt-svgrepo-com.svg',
+      src: 'src/assets/active-locationmarker-svgrepo-com.svg',
       scale: 0.05,
     })
   })
   const selection = new Select({
     style: selectedStyle,
   })
+
+  console.log(selection.getFeatures);
 }
 
 // function createPinOnClick(map: Map) {
