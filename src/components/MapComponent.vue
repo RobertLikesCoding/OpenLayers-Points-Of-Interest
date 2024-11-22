@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import 'ol/ol.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -13,12 +13,14 @@ import { fromLonLat } from 'ol/proj';
 import Select from "ol/interaction/Select"
 import coordinates from "../../coordinates.ts"
 
+const map = ref<Map | null>(null);
+
 onMounted(() => {
   initiateMap();
 });
 
 function initiateMap() {
-  const map = new Map({
+  map.value = new Map({
     target: 'map', // ID of the map container
     layers: [
       new TileLayer({
@@ -31,22 +33,21 @@ function initiateMap() {
     }),
   });
 
-  createPinsFromList(map);
+  createPinsFromList();
+  map.value?.addInteraction(select);
+}
 
 const selectedStyle = new Style({
-    image: new Icon({
-      anchor: [0.5, 1],
-      src: 'src/assets/active-locationmarker-svgrepo-com.svg',
-      scale: 0.05,
-    })
+  image: new Icon({
+    anchor: [0.5, 1],
+    src: 'src/assets/active-locationmarker-svgrepo-com.svg',
+    scale: 0.05,
   })
+})
 
-  const select = new Select({
-    style: selectedStyle,
-  });
-  map.addInteraction(select);
-  const selectedFeatures = select.getFeatures();
-}
+const select = new Select({
+  style: selectedStyle,
+});
 
 const vectorSource = new Vector();
 // vector layer to display pins
@@ -63,8 +64,8 @@ const pinStyle = new Style({
   })
 })
 
-function createPinsFromList(map: Map) {
-  map.addLayer(vectorLayer);
+function createPinsFromList() {
+  map.value?.addLayer(vectorLayer);
   coordinates.forEach((coord) => {
     const pin = new Feature({
       geometry: new Point(coord.longlat)
@@ -72,21 +73,6 @@ function createPinsFromList(map: Map) {
     pin.setStyle(pinStyle);
     vectorSource.addFeature(pin);
   })
-}
-
-function selectLocationPin() {
-  const selectedStyle = new Style({
-    image: new Icon({
-      anchor: [0.5, 1],
-      src: 'src/assets/active-locationmarker-svgrepo-com.svg',
-      scale: 0.05,
-    })
-  })
-  const selection = new Select({
-    style: selectedStyle,
-  })
-
-  console.log(selection.getFeatures);
 }
 
 // function createPinOnClick(map: Map) {
