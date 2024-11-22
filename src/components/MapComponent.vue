@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import 'ol/ol.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
+import {OSM, Vector} from 'ol/source.js';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
+import {Style, Icon} from 'ol/style.js';
 import { fromLonLat } from 'ol/proj';
+import Select from "ol/interaction/Select"
 import coordinates from "../../coordinates.ts"
 
 onMounted(() => {
@@ -35,7 +34,7 @@ function initiateMap() {
   createPinsFromList(map);
 }
 
-const vectorSource = new VectorSource();
+const vectorSource = new Vector();
 // vector layer to display pins
 const vectorLayer = new VectorLayer({
   source: vectorSource,
@@ -45,10 +44,35 @@ const vectorLayer = new VectorLayer({
 const pinStyle = new Style({
   image: new Icon({
     anchor: [0.5, 1],
-    src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // Marker icon
-    scale: 0.1,
+    src: 'src/assets/location-pin-alt-svgrepo-com.svg',
+    scale: 0.05,
   })
 })
+
+function createPinsFromList(map: Map) {
+  map.addLayer(vectorLayer);
+  coordinates.forEach((coord) => {
+    const pin = new Feature({
+      geometry: new Point(coord.longlat)
+    })
+    pin.setStyle(pinStyle);
+    vectorSource.addFeature(pin);
+    console.log('Pin added at:', coord.longlat);
+  })
+}
+
+function selectLocationPin() {
+  const selectedStyle = new Style({
+    image: new Icon({
+      anchor: [0.5, 1],
+      src: 'src/assets/active-location-pin-alt-svgrepo-com.svg',
+      scale: 0.05,
+    })
+  })
+  const selection = new Select({
+    style: selectedStyle,
+  })
+}
 
 // function createPinOnClick(map: Map) {
 //   // source to store pin data
@@ -65,17 +89,6 @@ const pinStyle = new Style({
 //   })
 // }
 
-function createPinsFromList(map: Map) {
-  map.addLayer(vectorLayer);
-  coordinates.forEach((coord) => {
-    const pin = new Feature({
-      geometry: new Point(coord.longlat)
-    })
-    pin.setStyle(pinStyle);
-    vectorSource.addFeature(pin);
-    console.log('Pin added at:', coord.longlat);
-  })
-}
 </script>
 
 <template>
