@@ -1,12 +1,17 @@
-<script setup lang="ts">
-import HelloWorld from './components/LocationCardsList.vue'
+<script setup>
+import LocationPicker from "./components/LocationPicker.vue"
+import MapComponent from "./components/MapComponent.vue";
+
 </script>
 
 <template>
-  <div>
-
+  <div class="d-flex w-100">
+    <div class="list-group">
+      <h2 class="p-2">Baumschulenweg</h2>
+      <LocationPicker />
+    </div>
+    <MapComponent />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
