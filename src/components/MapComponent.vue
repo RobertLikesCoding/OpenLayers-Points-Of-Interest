@@ -9,6 +9,7 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
 import { Style, Icon } from 'ol/style.js';
+import {easeOut} from 'ol/easing';
 import { fromLonLat } from 'ol/proj';
 import locations from "../../locations-data.ts"
 import type { LocationType } from "../../locations-data.ts"
@@ -25,7 +26,7 @@ onMounted(() => {
   initiateMap();
   watch(() => props.selectedLocation, (newLocation) => {
     if (newLocation) {
-      highlightPin(newLocation.id);
+      cardClickHandler(newLocation.id);
     }
   });
 });
@@ -82,13 +83,27 @@ function createPinsFromList() {
   })
 }
 
-function highlightPin(selectedId: number) {
+function centerMapOnLocation(coordinates: number[]) {
+  map.value?.getView().animate({
+    zoom: 17,
+    center: coordinates,
+    duration: 500,
+    easing: easeOut,
+  })
+}
+
+function cardClickHandler(selectedId: number) {
   vectorSource.getFeatures().forEach((feature) => {
     // reset all pins to default style
     feature.setStyle(defaultPinStyle);
     // apply active style if the feature matches the selected ID
     if (feature.get("id") === selectedId) {
       feature.setStyle(activePinStyle);
+      const location = locations.find(loc => loc.id === selectedId);
+      if (location) {
+        console.log(location.coordinates)
+        centerMapOnLocation(location.coordinates);
+      }
     }
   });
 }
@@ -98,7 +113,7 @@ function pinClickHandler(map: Map) {
     map.forEachFeatureAtPixel(event.pixel, (feature) => {
       const featureId = feature.get('id');
       if (featureId !== undefined) {
-        highlightPin(featureId);
+        cardClickHandler(featureId);
         const searchLocation = locations.find(location => location.id === featureId)
         if (searchLocation) {
           props.handleClickLocation(searchLocation);
