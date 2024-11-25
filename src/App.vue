@@ -22,10 +22,10 @@ function handleClickLocation(location: LocationType): void {
     <MapComponent
       :selected-location="selectedLocation"
       :handle-click-location="handleClickLocation"
-      />
+    />
   </div>
 </template>
 
-<style scoped>
+<style>
 
 </style>

@@ -39,7 +39,7 @@ function initiateMap() {
       }),
     ],
     view: new View({
-      center: fromLonLat([13.4900, 52.4672]),
+      center: fromLonLat([13.4900, 52.4692]),
       zoom: 16,
     }),
   });

@@ -26,7 +26,8 @@
 
 <style>
   .location-picker {
-    position: absolute;
-    top: 10%;
+    overflow-y: scroll;
+    scrollbar-color: rgb(219, 219, 219) rgb(255, 255, 255);
+    scrollbar-width: thin;
   }
 </style>
