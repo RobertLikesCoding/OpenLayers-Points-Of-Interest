@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Location } from "./types.ts";
+import { Location } from "../locations-data";
 import LocationPicker from "./components/LocationPicker.vue"
 import MapComponent from "./components/MapComponent.vue";
 

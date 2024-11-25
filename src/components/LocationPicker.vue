@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from "vue";
-  import { Location } from "../types.ts";
-  import favoriteLocations from '../data';
+  import { Location } from "../../locations-data";
+  import favoriteLocations from '../../locations-data';
   import LocationCard from './LocationCard.vue';
 
   const locationsData = ref<Location[]>(favoriteLocations);
