@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Location } from "../locations-data";
+import { LocationType } from "../locations-data";
 import LocationPicker from "./components/LocationPicker.vue"
 import MapComponent from "./components/MapComponent.vue";
 
-const selectedLocation = ref<Location | null>(null);
-function handleClickLocation(location: Location): void {
+const selectedLocation = ref<LocationType | null>(null);
+function handleClickLocation(location: LocationType): void {
     selectedLocation.value = location;
   }
 </script>
@@ -19,7 +19,10 @@ function handleClickLocation(location: Location): void {
         :handle-click-location="handleClickLocation"
       />
     </div>
-    <MapComponent />
+    <MapComponent
+      :selected-location="selectedLocation"
+      :handle-click-location="handleClickLocation"
+      />
   </div>
 </template>
 
