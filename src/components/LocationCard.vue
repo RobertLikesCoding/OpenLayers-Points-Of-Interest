@@ -22,6 +22,5 @@
   .location-card {
     z-index: 10;
     width: 250px;
-    border: 2px solid black;
   }
 </style>
