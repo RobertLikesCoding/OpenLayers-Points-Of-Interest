@@ -4,14 +4,11 @@
   import favoriteLocations from '../data';
   import LocationCard from './LocationCard.vue';
 
-  const locationsData = ref(favoriteLocations);
-  const selectedLocation = ref();
-
-  function handleSelectedLocation(location: Location): void {
-    selectedLocation.value = location;
-    console.log("Hello")
-  }
-
+  const locationsData = ref<Location[]>(favoriteLocations);
+  const props = defineProps<{
+    selectedLocation: Location | null;
+    handleClickLocation: (location: Location) => void;
+  }>();
 </script>
 
 <template>
@@ -20,8 +17,8 @@
         v-for="location in locationsData"
         :key="location.id"
         :location="location"
-        :selected="location === selectedLocation"
-        @click="handleSelectedLocation(location)"
+        :selected="location === props.selectedLocation"
+        @click="props.handleClickLocation(location)"
       />
   </div>
 </template>
