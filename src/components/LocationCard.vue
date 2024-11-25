@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Location } from "../types.ts";
+  import { Location } from "../../locations-data";
 
   defineProps<{
     location: Location,
@@ -10,7 +10,7 @@
 <template>
   <div class="list-group-item card mb-3 p-0 location-card shadow" :class="{'border-success border-3': selected}">
     <div class="card-body">
-      <h5 class="card-title">{{ location.title }}</h5>
+      <h5 class="card-title">{{ location.name }}</h5>
       <p class="card-text">{{ location.description }}</p>
       <p class="card-text">{{ location.address }} <br> {{ location.postalCode }}</p>
     </div>

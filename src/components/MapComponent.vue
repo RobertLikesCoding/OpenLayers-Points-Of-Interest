@@ -8,10 +8,10 @@ import { OSM, Vector } from 'ol/source.js';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
-import { Style, Icon, Fill, Stroke } from 'ol/style.js';
+import { Style, Icon } from 'ol/style.js';
 import { fromLonLat } from 'ol/proj';
 import Select from "ol/interaction/Select"
-import coordinates from "../../coordinates.ts"
+import coordinates from "../../locations-data.ts"
 
 const map = ref<Map | null>(null);
 
@@ -68,7 +68,7 @@ function createPinsFromList() {
   map.value?.addLayer(vectorLayer);
   coordinates.forEach((coord) => {
     const pin = new Feature({
-      geometry: new Point(coord.longlat)
+      geometry: new Point(coord.coordinates)
     })
     pin.setStyle(pinStyle);
     vectorSource.addFeature(pin);
