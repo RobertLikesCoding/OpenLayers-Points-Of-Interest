@@ -1,13 +1,13 @@
 <script setup lang="ts">
   import { ref } from "vue";
-  import { Location } from "../../locations-data";
+  import { LocationType } from "../../locations-data";
   import favoriteLocations from '../../locations-data';
   import LocationCard from './LocationCard.vue';
 
-  const locationsData = ref<Location[]>(favoriteLocations);
+  const locationsData = ref<LocationType[]>(favoriteLocations);
   const props = defineProps<{
-    selectedLocation: Location | null;
-    handleClickLocation: (location: Location) => void;
+    selectedLocation: LocationType | null;
+    handleClickLocation: (location: LocationType) => void;
   }>();
 </script>
 

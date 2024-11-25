@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { Location } from "../../locations-data";
+  import { LocationType } from "../../locations-data";
 
   defineProps<{
-    location: Location,
+    location: LocationType,
     selected: boolean,
   }>();
 </script>

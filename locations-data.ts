@@ -1,4 +1,4 @@
-export interface Location {
+export interface LocationType {
   id: number,
   name: string,
   description: string,
@@ -7,7 +7,7 @@ export interface Location {
   coordinates: number[]
 }
 
-const locations: Location[] = [{
+const locations: LocationType[] = [{
   id: 1,
   name: "Zu Hause",
   description: "Hier wohne ich",

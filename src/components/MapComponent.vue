@@ -12,8 +12,19 @@ import { Style, Icon } from 'ol/style.js';
 import { fromLonLat } from 'ol/proj';
 import Select from "ol/interaction/Select"
 import coordinates from "../../locations-data.ts"
+import type { LocationType } from "../../locations-data.ts"
+import { watch } from "vue";
 
 const map = ref<Map | null>(null);
+const props = defineProps<{
+  selectedLocation: LocationType | null,
+}>();
+
+watch(() => props.selectedLocation, (newLocation) => {
+  if (newLocation) {
+    highlightPin(newLocation.id); // Call a function to update the pin style
+  }
+});
 
 onMounted(() => {
   initiateMap();
@@ -34,10 +45,10 @@ function initiateMap() {
   });
 
   createPinsFromList();
-  map.value?.addInteraction(select);
+  map.value.addInteraction(selectLocation);
 }
 
-const selectedStyle = new Style({
+const activePinStyle = new Style({
   image: new Icon({
     anchor: [0.5, 1],
     src: 'src/assets/active-locationmarker-svgrepo-com.svg',
@@ -45,8 +56,8 @@ const selectedStyle = new Style({
   })
 })
 
-const select = new Select({
-  style: selectedStyle,
+const selectLocation = new Select({
+  style: activePinStyle,
 });
 
 const vectorSource = new Vector();
@@ -56,7 +67,7 @@ const vectorLayer = new VectorLayer({
 });
 
 // create a pin
-const pinStyle = new Style({
+const defaultPinStyle = new Style({
   image: new Icon({
     anchor: [0.5, 1],
     src: 'src/assets/locationmarker-svgrepo-com.svg',
@@ -68,11 +79,24 @@ function createPinsFromList() {
   map.value?.addLayer(vectorLayer);
   coordinates.forEach((coord) => {
     const pin = new Feature({
-      geometry: new Point(coord.coordinates)
+      geometry: new Point(coord.coordinates),
+      id: coord.id,
     })
-    pin.setStyle(pinStyle);
+    pin.setStyle(defaultPinStyle);
     vectorSource.addFeature(pin);
   })
+}
+
+function highlightPin(selectedId: number) {
+  vectorSource.getFeatures().forEach((feature) => {
+    // Reset all pins to default style
+    feature.setStyle(defaultPinStyle);
+
+    // Apply active style if the feature matches the selected ID
+    if (feature.get("id") === selectedId) {
+      feature.setStyle(activePinStyle);
+    }
+  });
 }
 
 // function createPinOnClick(map: Map) {
@@ -84,7 +108,7 @@ function createPinsFromList() {
 //     const pin = new Feature({
 //       geometry: new Point(coordinate),
 //     })
-//     pin.setStyle(pinStyle);
+//     pin.setStyle(defaultPinStyle);
 //     vectorSource.addFeature(pin);
 //     console.log('Pin added at:', coordinate);
 //   })
