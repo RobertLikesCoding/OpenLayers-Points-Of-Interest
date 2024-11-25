@@ -6,9 +6,10 @@ This app is going to use the Open Layers API to show a map with markers of my fa
 
 ## Features
 
-- display a map with my location as a starting point
-- show pins for locations I find interesting
-- optional: filter pins by category
+[x] load the map with a list of locations
+[x] show locations as pins on the map
+[x] clicking on the pins and cards highlights selection
+[ ] show details of selected location
 
 ## Usage
 - Pan and zoom to explore the map
@@ -17,17 +18,17 @@ This app is going to use the Open Layers API to show a map with markers of my fa
 
 ## Components
 
-- Map
-- LocationCardsList
+- App
+- LocationPicker
 - LocationCard
-- LocatorPin
+- MapComponent
 
 ## Tech Stack
 
 - HTML, CSS, JS
+- Bootstrap
 - VueJS
 - OpenLayers API
-- possibly MapBox API
 
 ## Acknowledgments
 - OpenLayers Documentation
